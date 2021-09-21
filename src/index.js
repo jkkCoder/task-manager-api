@@ -41,7 +41,7 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 const myFunction = async ()=>{
-    const token = jwt.sign({ _id:"abc123" },"thisismynewcourse",{expiresIn:"1 seconds"})    //passing object as first arg,,and 2nd passing any series of characters
+    const token = jwt.sign({ _id:"abc123" },"thisismynewcourse",{expiresIn:"7 days"})    //passing object as first arg,,and 2nd passing any series of characters,,and 3rd arg object of expiresIn
     console.log(token)
 
     const data = jwt.verify(token,"thisismynewcourse")

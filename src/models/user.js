@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const validator = require("validator")
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -41,8 +42,24 @@ const userSchema = new mongoose.Schema({
                 throw new Error("password cannot contain `password`")
             }
         }
-    }
+    },
+    tokens:[{       //storing array of tokens.. so that user may login from many devices and logout from one and stay logged in in another
+        token:{
+            type:String,
+            required:true
+        }
+    }]
 })
+
+userSchema.methods.generateAuthToken = async function() {
+    const user = this
+    const token = jwt.sign({ _id: user._id},"thisismynewcourse")
+
+    user.tokens = user.tokens.concat({token:token})
+    await user.save()
+
+    return token
+}
 
 userSchema.statics.findByCredentials = async (email,password)=>{
     const user = await User.findOne({email})    //just like writing{email:email}
