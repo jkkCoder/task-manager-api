@@ -6,19 +6,29 @@ const taskRouter = require("./routers/task")
 const app = express()
 const port = process.env.PORT || 3000
 
-app.use(express.json())     //it's gonna automatically pass incoming json to object so we can access it in our request handlers
+// app.use((req,res,next)=>{
+//     console.log(req.method,req.path)
+//     if(req.method === "GET"){
+//         res.send("GET requests are disabled")
+//     }else{
+//         next()
+//     }
+// })
 
+app.use((req,res,next)=>{
+    res.status(503).send("site is currently down. check back soon")
+})
+
+app.use(express.json())     //it's gonna automatically pass incoming json to object so we can access it in our request handlers
 app.use(userRouter)
 app.use(taskRouter)
 
 //this is how to use route
-
 // const router = new express.Router()
 // router.get("/test",(req,res)=>{
 //     res.send("this is to test express.router")
 // })
 // app.use(router)
-
 
 app.listen(port,()=>{
     console.log("server is up on port",port)
