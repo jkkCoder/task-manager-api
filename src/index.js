@@ -15,9 +15,9 @@ const port = process.env.PORT || 3000
 //     }
 // })
 
-app.use((req,res,next)=>{
-    res.status(503).send("site is currently down. check back soon")
-})
+// app.use((req,res,next)=>{            //maitenance middleware
+//     res.status(503).send("site is currently down. check back soon")
+// })
 
 app.use(express.json())     //it's gonna automatically pass incoming json to object so we can access it in our request handlers
 app.use(userRouter)
