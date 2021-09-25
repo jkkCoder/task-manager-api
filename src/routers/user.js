@@ -26,6 +26,7 @@ router.post("/users/login",async (req,res)=>{
         const user = await User.findByCredentials(req.body.email,req.body.password)     //defining our function.. which will be defined in userschema
         const token = await user.generateAuthToken()                     //definig our method... which will be defined in userschema
         res.send({user,token})  //just like writing {user:user, token:token} (shorthand property of objects)
+        //whenever we send an object using res.send..the objects gets converted to json.stringify and then it calls toJSON ...so we have explicitly coded toJSON function in models to remove password and tokens
     }catch(e){
         res.status(400).send(e)
     }
