@@ -113,6 +113,7 @@ router.delete("/users/me",auth,async (req,res)=>{
         // }
         
         await req.user.remove()     //mongoose way to remove 
+                                    //it is having a auth function in user model in pre method
         res.send(req.user)
     }catch(e){
         res.status(500).send()
