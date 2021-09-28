@@ -50,6 +50,8 @@ const userSchema = new mongoose.Schema({
             required:true
         }
     }]
+},{
+    timestamps:true     //enables createdAt and updateAt in database
 })
 
 //virtual property is relation between two entities (task and user).. it won't be stored in database

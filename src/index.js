@@ -63,14 +63,14 @@ const jwt = require("jsonwebtoken")
 const Task = require("./models/task")
 const User = require("./models/user")
 
-const main = async () =>{
-    // const task = await Task.findById( "614f0d78446f2b0f8b4426b9")
-    // await task.populate("owner")            //it's gonna find the user who's associated with the task and task.owner now be the profile itself .
-    //                                          //we can populate because of ref:User given in task model
-    // console.log(task.owner)
-    const user = await User.findById("614f0d4a446f2b0f8b4426b0")
-    await user.populate("userTasks")
-    console.log(user.userTasks)
-}
+// const main = async () =>{
+//     // const task = await Task.findById( "614f0d78446f2b0f8b4426b9")
+//     // await task.populate("owner")            //it's gonna find the user who's associated with the task and task.owner now be the profile itself .
+//     //                                          //we can populate because of ref:User given in task model
+//     // console.log(task.owner)
+//     const user = await User.findById("614f0d4a446f2b0f8b4426b0")
+//     await user.populate("userTasks")
+//     console.log(user.userTasks)
+// }
 
-main()
+// main()
