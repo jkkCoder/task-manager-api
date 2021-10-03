@@ -16,7 +16,7 @@ const upload = multer({
     fileFilter(req,file,cb){    //cb is callback
         if(!file.originalname.match(/\.(doc|docx)$/)){    //file.original name has the file name on user's system
                                                             //.match takes regular expression
-            return cb(new Error("please upload a PDF"))
+            return cb(new Error("please upload a word file"))
         }
 
         cb(undefined,true)
@@ -24,6 +24,8 @@ const upload = multer({
 })
 app.post("/upload",upload.single("upload"),(req,res)=>{     //upload in upload.single is key passed with value as image
     res.send()
+},(error,req,res,next)=>{
+    res.status(400).send({error:error.message})
 })
 
 //middleware
