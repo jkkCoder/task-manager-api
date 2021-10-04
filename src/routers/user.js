@@ -122,7 +122,7 @@ router.delete("/users/me",auth,async (req,res)=>{
 })
 
 const upload = multer({
-    dest:"avatars",
+    // dest:"avatars",      // we won't be saving files in directory 
     limits:{
         fileSize:1000000    //file size cannot be more than 1mb
     },
@@ -133,9 +133,17 @@ const upload = multer({
         cb(undefined,true)
     }
 })
-router.post("/users/me/avatar",auth,upload.single("avatar"),(req,res)=>{
+router.post("/users/me/avatar",auth,upload.single("avatar"),async (req,res)=>{
+    req.user.avatar = req.file.buffer   //req.user is from auth req.file.buffer is only accessible if no dest is given in multer
+    await req.user.save()
     res.send()
 },(error,req,res,next)=>{
     res.status(400).send({error:error.message})
+})
+
+router.delete("/users/me/avatar",auth,async(req,res)=>{
+    req.user.avatar = undefined;
+    await req.user.save()
+    res.send()
 })
 module.exports = router
