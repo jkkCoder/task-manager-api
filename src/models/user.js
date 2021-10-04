@@ -64,12 +64,13 @@ userSchema.virtual("userTasks",{
     foreignField:"owner"    //name of field in other entity
 })
 
-userSchema.methods.toJSON = function(){
+userSchema.methods.toJSON = function(){     
     const user = this
     const userObject = user.toObject()
 
-    delete userObject.password
+    delete userObject.password      //not sending password and tokens when user requests to view profile
     delete userObject.tokens
+    delete userObject.avatar
 
     return userObject
 }

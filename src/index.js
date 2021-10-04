@@ -8,25 +8,25 @@ const port = process.env.PORT || 3000
 
 //this is how to upload a file
 const multer = require("multer")
-const upload = multer({
-    dest:"images",       //folder where file will get saved
-    limits:{
-        fileSize:1000000     //file cannot be more 1million bytes that is 1 mega bytes.
-    },
-    fileFilter(req,file,cb){    //cb is callback
-        if(!file.originalname.match(/\.(doc|docx)$/)){    //file.original name has the file name on user's system
-                                                            //.match takes regular expression
-            return cb(new Error("please upload a word file"))
-        }
+// const upload = multer({
+//     dest:"images",       //folder where file will get saved
+//     limits:{
+//         fileSize:1000000     //file cannot be more 1million bytes that is 1 mega bytes.
+//     },
+//     fileFilter(req,file,cb){    //cb is callback
+//         if(!file.originalname.match(/\.(doc|docx)$/)){    //file.original name has the file name on user's system
+//                                                             //.match takes regular expression
+//             return cb(new Error("please upload a word file"))
+//         }
 
-        cb(undefined,true)
-    }
-})
-app.post("/upload",upload.single("upload"),(req,res)=>{     //upload in upload.single is key passed with value as image
-    res.send()
-},(error,req,res,next)=>{
-    res.status(400).send({error:error.message})
-})
+//         cb(undefined,true)
+//     }
+// })
+// app.post("/upload",upload.single("upload"),(req,res)=>{     //upload in upload.single is key passed with value as image
+//     res.send()
+// },(error,req,res,next)=>{
+//     res.status(400).send({error:error.message})
+// })
 
 //middleware
 // app.use((req,res,next)=>{
